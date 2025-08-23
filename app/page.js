@@ -10,7 +10,7 @@ export default function Home() {
   const router = useRouter(); // Initialize useRouter
 
   const handleButtonClick = () => {
-    router.push("/job-openings"); // Navigate to /job-openings
+    router.push("/login"); // Navigate to /login
   };
   return (
     <div>
