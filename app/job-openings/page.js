@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import JobCard from "../components-self/job-card";
+import Navbar from "../components-self/Navbar";
 
 export default function Page() {
   const [jobPostings, setJobPostings] = useState([]);
@@ -22,6 +23,8 @@ export default function Page() {
   }, []);
 
   return (
+    <div>
+    <Navbar />
     <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
       {jobPostings.map((job) => (
         <JobCard
@@ -31,6 +34,7 @@ export default function Page() {
          
         />
       ))}
+    </div>
     </div>
   );
 }

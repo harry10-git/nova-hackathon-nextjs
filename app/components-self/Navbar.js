@@ -1,0 +1,60 @@
+"use client";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
+export default function Navbar() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const router = useRouter();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        setIsLoggedIn(!!token); // Check if the user is logged in
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("email");
+        router.push("/login"); // Redirect to login page
+    };
+
+    const handleLogin = () => {
+        router.push("/login"); // Redirect to login page
+    };
+
+    return (
+        <nav className="bg-red-500 text-white flex items-center justify-between px-6 py-4">
+            {/* Left Section */}
+            <div className="flex items-center space-x-2">
+                <img src="https://create.hsbc/content/dam/brandhub/brand/ld-history/hexagon_1192x671.jpg" alt="Hirelink Logo" className="h-8 w-12" />
+                <span className="text-xl font-bold">Hirelink</span>
+            </div>
+
+            {/* Middle Section */}
+            <div className="flex space-x-6">
+                <a href="/item1" className="hover:underline">Item1</a>
+                <a href="/item2" className="hover:underline">Item2</a>
+                <a href="/item3" className="hover:underline">Item3</a>
+                <a href="/item4" className="hover:underline">Item4</a>
+            </div>
+
+            {/* Right Section */}
+            <div>
+                {isLoggedIn ? (
+                    <button
+                        onClick={handleLogout}
+                        className="bg-white text-red-500 px-4 py-2 rounded hover:bg-gray-200"
+                    >
+                        Logout
+                    </button>
+                ) : (
+                    <button
+                        onClick={handleLogin}
+                        className="bg-white text-red-500 px-4 py-2 rounded hover:bg-gray-200"
+                    >
+                        Login
+                    </button>
+                )}
+            </div>
+        </nav>
+    );
+}

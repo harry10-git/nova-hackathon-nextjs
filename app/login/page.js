@@ -19,8 +19,9 @@ export default function Login() {
 
     const data = await response.json();
     if (response.ok) {
-      localStorage.setItem("token", data.token);
-      router.push("/job-openings");
+      localStorage.setItem("token", data.token); // Store the token
+      localStorage.setItem("email", formData.email); // Store the email
+      router.push("/home"); // Redirect to home page
     } else {
       alert(data.error);
     }
