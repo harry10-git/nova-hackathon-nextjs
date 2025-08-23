@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     year_of_exp: { type: Number, required: true },
     skills: [
         {
-            skill_id: { type: mongoose.Schema.Types.ObjectId, required: true },
+            skill_id: { type: String, required: true },
             experience: { type: Number, required: true },
         },
     ],
