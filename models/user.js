@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
             experience: { type: Number, required: true },
         },
     ],
-});
+},{ collection: 'users' });
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 
