@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { AuroraBackground } from "../components/aurora-background";
-import { Button } from "../components/moving-borders";
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -65,14 +64,19 @@ export default function Login() {
             className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-700 bg-transparent dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
-          {/* Centered Login Button */}
-          <Button
-            borderRadius="1rem"
-            className="self-center bg-blue-400 dark:bg-slate-900 text-white text-lg py-3"
+          {/* Updated Login Button */}
+          <button
             type="submit"
+            className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-red-500 rounded-xl group"
           >
-            Login
-          </Button>
+            <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-red-700 rounded group-hover:-mr-4 group-hover:-mt-4">
+              <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
+            </span>
+            <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full translate-y-full bg-red-600 rounded-2xl group-hover:mb-12 group-hover:translate-x-0"></span>
+            <span className="relative w-full text-center text-white transition-colors duration-200 ease-in-out group-hover:text-white">
+              Login
+            </span>
+          </button>
         </form>
 
         {/* Register Section */}
@@ -80,14 +84,13 @@ export default function Login() {
           <p className="text-sm dark:text-neutral-300">
             Not registered yet?
           </p>
-          <Button
-            borderRadius="1rem"
-            className="bg-green-500 dark:bg-slate-900 text-white text-lg px-6 py-2"
+          <button
             type="button"
             onClick={() => router.push("/register")}
+            className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600"
           >
             Register
-          </Button>
+          </button>
         </div>
       </motion.div>
     </AuroraBackground>
