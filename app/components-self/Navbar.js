@@ -31,8 +31,8 @@ export default function Navbar() {
 
             {/* Middle Section */}
             <div className="flex space-x-6">
-                <a href="/item1" className="hover:underline">Item1</a>
-                <a href="/item2" className="hover:underline">Item2</a>
+                <a href="/home" className="hover:underline">Home</a>
+                <a href="/job-openings" className="hover:underline">Jobs</a>
                 <a href="/item3" className="hover:underline">Item3</a>
                 <a href="/item4" className="hover:underline">Item4</a>
             </div>
