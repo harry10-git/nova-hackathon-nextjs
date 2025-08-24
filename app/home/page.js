@@ -1,79 +1,107 @@
 "use client";
 import { useEffect, useState } from "react";
 import Navbar from "../components-self/Navbar";
-import { ThreeDMarquee } from "../components/3d-marqquee";
 
 export default function Home() {
-    const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
+  const [totalJobs, setTotalJobs] = useState(0);
+  const [popularSkills, setPopularSkills] = useState([]);
 
-    useEffect(() => {
-        const userEmail = localStorage.getItem("email"); // Retrieve the email from localStorage
-        setEmail(userEmail);
-    }, []);
+  useEffect(() => {
+    // Retrieve the email from localStorage
+    const userEmail = localStorage.getItem("email");
+    setEmail(userEmail);
 
-    const images = [
-    "https://assets.aceternity.com/cloudinary_bkp/3d-card.png",
-    "https://assets.aceternity.com/animated-modal.png",
-    "https://assets.aceternity.com/animated-testimonials.webp",
-    "https://assets.aceternity.com/cloudinary_bkp/Tooltip_luwy44.png",
-    "https://assets.aceternity.com/github-globe.png",
-    "https://assets.aceternity.com/glare-card.png",
-    "https://assets.aceternity.com/layout-grid.png",
-    "https://assets.aceternity.com/flip-text.png",
-    "https://assets.aceternity.com/hero-highlight.png",
-    "https://assets.aceternity.com/carousel.webp",
-    "https://assets.aceternity.com/placeholders-and-vanish-input.png",
-    "https://assets.aceternity.com/shooting-stars-and-stars-background.png",
-    "https://assets.aceternity.com/signup-form.png",
-    "https://assets.aceternity.com/cloudinary_bkp/stars_sxle3d.png",
-    "https://assets.aceternity.com/spotlight-new.webp",
-    "https://assets.aceternity.com/cloudinary_bkp/Spotlight_ar5jpr.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Parallax_Scroll_pzlatw_anfkh7.png",
-    "https://assets.aceternity.com/tabs.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Tracing_Beam_npujte.png",
-    "https://assets.aceternity.com/cloudinary_bkp/typewriter-effect.png",
-    "https://assets.aceternity.com/glowing-effect.webp",
-    "https://assets.aceternity.com/hover-border-gradient.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Infinite_Moving_Cards_evhzur.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Lamp_hlq3ln.png",
-    "https://assets.aceternity.com/macbook-scroll.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Meteors_fye3ys.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Moving_Border_yn78lv.png",
-    "https://assets.aceternity.com/multi-step-loader.png",
-    "https://assets.aceternity.com/vortex.png",
-    "https://assets.aceternity.com/wobble-card.png",
-    "https://assets.aceternity.com/world-map.webp",
-  ];
+    // Fetch total jobs from the API
+    const fetchTotalJobs = async () => {
+      try {
+        const response = await fetch("/api/home/totalJobs");
+        if (response.ok) {
+          const data = await response.json();
+          setTotalJobs(data.totalJobPostings);
+        } else {
+          console.error("Failed to fetch total jobs");
+        }
+      } catch (error) {
+        console.error("Error fetching total jobs:", error);
+      }
+    };
 
-    return (
-        <div className="">
-        <Navbar />
+    // Fetch popular skills from the API
+    const fetchPopularSkills = async () => {
+      try {
+        const response = await fetch("/api/home/popularSkills");
+        if (response.ok) {
+          const data = await response.json();
+          // Take the top 4 most popular skills
+          setPopularSkills(data.slice(0, 4));
+        } else {
+          console.error("Failed to fetch popular skills");
+        }
+      } catch (error) {
+        console.error("Error fetching popular skills:", error);
+      }
+    };
 
-            
-            {email ? (
-                <p className="text-xl mt-4">Hello, {email}</p>
-            ) : (
-                <p className="text-xl mt-4">You are not logged in.</p>
-            )}
+    fetchTotalJobs();
+    fetchPopularSkills();
+  }, []);
 
-        <div className="bg-red-500 text-white mx-6 rounded-xl px-4 py-2">
-            <div className="grid grid-cols-6">
-            <div className="col-span-2">
-                <h4 className="text-3xl">Total Job Openings: {50} </h4>
-            </div>
-             
-            <div className="col-span-4 bg-yellow-200">
-                asfa
-            </div>
-            </div>
-            
+  return (
+    <div className="">
+      <Navbar />
 
-        </div>    
+      {email ? (
+        <p className="text-xl mt-4">Hello, {email}</p>
+      ) : (
+        <p className="text-xl mt-4">You are not logged in.</p>
+      )}
 
-        <div className="mx-auto my-10 rounded-3xl bg-gray-950/5 p-2">
-        <ThreeDMarquee images={images} />
+      <div className="mx-6 rounded-xl px-4 py-2">
+        <div className="grid grid-cols-6 gap-4">
+          <div className="col-span-2 flex flex-col gap-2 items-center justify-center bg-red-500 px-2 py-4">
+            <h4 className="text-3xl text-white font-bold">Total Job Openings :</h4>
+            <h3 className="text-5xl font-extrabold text-white"> {totalJobs}</h3>
+          </div>
+
+          <div className="col-span-3 px-2 py-4 flex flex-col justify-center items-center bg-red-500">
+  <h4 className="text-2xl font-bold text-white mb-3">Top Skills</h4>
+  <div className="overflow-x-auto w-full">
+    <table className="min-w-full border border-red-200 divide-y-2 divide-red-300">
+      <thead className="bg-white text-black">
+        <tr>
+          <th className="px-4 py-2 text-left font-semibold">Skill</th>
+          <th className="px-4 py-2 text-left font-semibold">Jobs</th>
+        </tr>
+      </thead>
+
+      <tbody className="divide-y divide-red-200 bg-white">
+        {popularSkills.map((skillObj, index) => {
+          const skillName = Object.keys(skillObj)[0];
+          const skillCount = skillObj[skillName];
+          return (
+            <tr
+              key={index}
+              className="hover:bg-red-50 transition duration-200"
+            >
+              <td className="px-4 py-2 text-red-700 font-medium">{skillName}</td>
+              <td className="px-4 py-2 text-gray-700">{skillCount} jobs</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
         </div>
+
+        <div className="col-span-1">
+            afa
         </div>
 
-    );
+     
+
+        </div>
+      </div>
+    </div>
+  );
 }
