@@ -80,7 +80,7 @@ export default function Profile() {
     <div>
       <Navbar />
 
-      <div className="grid grid-cols-2 mt-20">
+      <div className="grid grid-cols-2 mt-20 justify-center items-center">
         <div className="col-span-1">
           <Image
             src={img}
