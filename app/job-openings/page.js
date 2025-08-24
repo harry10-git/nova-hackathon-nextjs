@@ -24,17 +24,17 @@ export default function Page() {
 
   return (
     <div>
-    <Navbar />
-    <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
-      {jobPostings.map((job) => (
-        <JobCard
-          key={job._id} // Use the unique ID from the API response
-          title={job.title} // Pass the title dynamically
-          description={job.job_description} // Pass the job description dynamically
-         
-        />
-      ))}
-    </div>
+      <Navbar />
+      <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {jobPostings.map((job) => (
+          <JobCard
+            key={job._id}
+            jobId={job._id} // <-- Pass the job ID here
+            title={job.title}
+            description={job.job_description}
+          />
+        ))}
+      </div>
     </div>
   );
 }

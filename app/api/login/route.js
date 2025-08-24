@@ -13,20 +13,38 @@ export async function POST(req) {
         const { email, password } = body;
 
         if (!email || !password) {
-            return new Response(JSON.stringify({ error: 'All fields are required' }), { status: 400 });
+            return new Response(
+                JSON.stringify({ error: 'All fields are required' }),
+                { status: 400 }
+            );
         }
 
         const user = await User.findOne({ email });
 
         if (!user || !(await bcrypt.compare(password, user.password))) {
-            return new Response(JSON.stringify({ error: 'Invalid credentials' }), { status: 401 });
+            return new Response(
+                JSON.stringify({ error: 'Invalid credentials' }),
+                { status: 401 }
+            );
         }
 
-        const token = jwt.sign({ userId: user._id, email: user.email }, 'mysecret', { expiresIn: '1h' });
+        // Generate JWT token
+        const token = jwt.sign(
+            { userId: user._id, email: user.email },
+            'mysecret',
+            { expiresIn: '1h' }
+        );
 
-        return new Response(JSON.stringify({ token }), { status: 200 });
+        // ✅ Return both token and userId
+        return new Response(
+            JSON.stringify({ token, userId: user._id }),
+            { status: 200, headers: { "Content-Type": "application/json" } }
+        );
     } catch (error) {
-        console.error('Error:', error); // Log the error details
-        return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500 });
+        console.error('Error:', error);
+        return new Response(
+            JSON.stringify({ error: 'Internal server error' }),
+            { status: 500 }
+        );
     }
 }

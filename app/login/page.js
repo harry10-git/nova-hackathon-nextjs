@@ -20,6 +20,7 @@ export default function Login() {
     if (response.ok) {
       localStorage.setItem("token", data.token); // Store the token
       localStorage.setItem("email", formData.email); // Store the email
+      localStorage.setItem("userId", data.userId);
       router.push("/home"); // Redirect to home page
     } else {
       alert(data.error);
