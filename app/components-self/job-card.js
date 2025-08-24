@@ -1,17 +1,46 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation"; 
 import { CardBody, CardContainer, CardItem } from "../components/3d-card";
 
-export default function JobCard({ title, description, imageUrl, onTryNow, onSignUp }) {
+export default function JobCard({
+  jobId,
+  title,
+  description,
+}) {
+  const router = useRouter();
+
+  const handleTryNow = async () => {
+    const userId = localStorage.getItem("userId"); // ✅ directly get from localStorage
+    if (!userId) {
+      alert("You must be logged in to get recommendations.");
+      // Optionally redirect
+      // router.push("/login");
+      return;
+    }
+
+    try {
+      // ✅ Store IDs in sessionStorage
+      sessionStorage.setItem("userIdForRecommendation", userId);
+      sessionStorage.setItem("jobIdForRecommendation", jobId);
+
+      // Navigate to recommendations page
+      router.push("/recommendations");
+    } catch (error) {
+      console.error("Error preparing for recommendations:", error);
+      alert("Could not prepare your recommendations. Please try again.");
+    }
+  };
+
   return (
     <CardContainer className="inter-var">
-      <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-white dark:border-black/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+      <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-white dark:border-black/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border">
         <CardItem
           translateZ="50"
           className="text-xl font-bold text-neutral-600 dark:text-red-600"
         >
-         {title}
+          {title}
         </CardItem>
         <CardItem
           as="p"
@@ -32,9 +61,8 @@ export default function JobCard({ title, description, imageUrl, onTryNow, onSign
         <div className="flex justify-between items-center mt-20">
           <CardItem
             translateZ={20}
-            as="a"
-            href="https://twitter.com/mannupaaji"
-            target="__blank"
+            as="button"
+            onClick={handleTryNow}
             className="px-4 py-2 rounded-xl text-xs font-normal dark:text-neutral-800"
           >
             Try now →
