@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { FaUserCircle } from "react-icons/fa"; // Import the profile icon from react-icons
 
 export default function Navbar() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,11 +22,19 @@ export default function Navbar() {
         router.push("/login"); // Redirect to login page
     };
 
+    const handleProfileClick = () => {
+        router.push("/profile"); // Redirect to profile page
+    };
+
     return (
         <nav className="bg-red-500 text-white flex items-center justify-between px-6 py-4">
             {/* Left Section */}
             <div className="flex items-center space-x-2">
-                <img src="https://create.hsbc/content/dam/brandhub/brand/ld-history/hexagon_1192x671.jpg" alt="Hirelink Logo" className="h-8 w-12" />
+                <img
+                    src="https://create.hsbc/content/dam/brandhub/brand/ld-history/hexagon_1192x671.jpg"
+                    alt="Hirelink Logo"
+                    className="h-8 w-12"
+                />
                 <span className="text-xl font-bold">Hirelink</span>
             </div>
 
@@ -38,7 +47,13 @@ export default function Navbar() {
             </div>
 
             {/* Right Section */}
-            <div>
+            <div className="flex items-center space-x-4">
+                {isLoggedIn && (
+                    <FaUserCircle
+                        className="text-white text-3xl cursor-pointer hover:opacity-80"
+                        onClick={handleProfileClick}
+                    />
+                )}
                 {isLoggedIn ? (
                     <button
                         onClick={handleLogout}
