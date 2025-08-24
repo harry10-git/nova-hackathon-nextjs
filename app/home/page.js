@@ -1,6 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import Navbar from "../components-self/Navbar";
+import InfiniteMovingCardsDemo from "../components-self/testimonials";
+import { AiOutlineArrowRight } from "react-icons/ai"; // Import the arrow icon from React Icons
+
+
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -58,13 +62,13 @@ export default function Home() {
       )}
 
       <div className="mx-6 rounded-xl px-4 py-2">
-        <div className="grid grid-cols-6 gap-4">
-          <div className="col-span-2 flex flex-col gap-2 items-center justify-center bg-red-500 px-2 py-4">
+        <div className="grid grid-cols-6 gap-6">
+          <div className="col-span-2 flex flex-col gap-2 items-center justify-center bg-red-500 px-2 py-4 transform transition-transform duration-300 hover:scale-105">
             <h4 className="text-3xl text-white font-bold">Total Job Openings :</h4>
             <h3 className="text-5xl font-extrabold text-white"> {totalJobs}</h3>
           </div>
 
-          <div className="col-span-3 px-2 py-4 flex flex-col justify-center items-center bg-red-500">
+          <div className="col-span-3 px-2 py-4 flex flex-col justify-center items-center bg-red-500 transform transition-transform duration-300 hover:scale-105">
   <h4 className="text-2xl font-bold text-white mb-3">Top Skills</h4>
   <div className="overflow-x-auto w-full">
     <table className="min-w-full border border-red-200 divide-y-2 divide-red-300">
@@ -94,14 +98,25 @@ export default function Home() {
   </div>
         </div>
 
-        <div className="col-span-1">
-            afa
-        </div>
+       <div
+  className="col-span-1 bg-red-500 text-white text-2xl font-semibold flex flex-col justify-center items-center text-center transform transition-transform duration-300 hover:scale-105 cursor-pointer"
+  onClick={() => window.location.href = "/job-openings"}
+>
+  <h3>Explore <br /> More <br /> Opportunities </h3>
+  <div>
+    <AiOutlineArrowRight className="mt-2 w-8 h-8" /> {/* React Icon */}
+  </div>
+</div>
+
+        
+
+
 
      
 
         </div>
       </div>
+      <InfiniteMovingCardsDemo />
     </div>
   );
 }
