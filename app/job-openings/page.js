@@ -23,9 +23,15 @@ export default function Page() {
   }, []);
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "#ffffff",
+        backgroundImage: 'url("https://www.transparenttextures.com/patterns/axiom-pattern.png")',
+        minHeight: "100vh",
+      }}
+    >
       <Navbar />
-      <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="px-4 grid grid-cols-1 sm:grid-cols-3 gap-6 mt-14">
         {jobPostings.map((job) => (
           <JobCard
             key={job._id}
