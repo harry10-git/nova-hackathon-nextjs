@@ -79,7 +79,7 @@ export default function RecommendationsPage() {
     <div>
       <Navbar />
       <div className="container mx-auto p-6">
-        <h1 className="text-3xl font-extrabold mb-6 text-gray-900 dark:text-white">
+        <h1 className="text-3xl font-extrabold mb-6 text-gray-900 dark:text-black">
           🎯 Recommended Courses For You
         </h1>
 
@@ -102,7 +102,7 @@ export default function RecommendationsPage() {
               </p>
             ) : (
               <div>
-                <p className="text-lg mb-6 text-gray-700 dark:text-gray-300">
+                <p className="text-lg mb-6 text-gray-700 dark:text-gray-700">
                   Based on the job requirements, you might want to learn:{" "}
                   <strong className="text-blue-600">
                     {missingSkills.join(", ")}
@@ -111,8 +111,8 @@ export default function RecommendationsPage() {
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {Object.entries(recommendations).map(([skill, course]) => {
-                    const cleanedCourse = course.replace(
+                  {Object.entries(recommendations).map(([skill, courseData]) => {
+                    const cleanedCourse = courseData.course.replace(
                       /^(.*?):\s*\1/,
                       "$1"
                     );
@@ -124,18 +124,30 @@ export default function RecommendationsPage() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.4 }}
                       >
-                        <Card className="hover:shadow-xl hover:scale-105 transition-all duration-300">
-                          <CardHeader>
-                            <CardTitle>📘 {skill}</CardTitle>
-                            <CardDescription>
-                              A course to help you master this skill
-                            </CardDescription>
-                          </CardHeader>
-                          <CardContent>
-                            <p className="font-semibold text-gray-800 dark:text-gray-200">
-                              {cleanedCourse}
-                            </p>
-                          </CardContent>
+                        <Card className="hover:shadow-xl hover:scale-105 transition-all duration-300 flex flex-col justify-between">
+                          <div>
+                            <CardHeader>
+                              <CardTitle>📘 {skill}</CardTitle>
+                              <CardDescription>
+                                A course to help you master this skill
+                              </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                              <p className="font-semibold text-gray-800 dark:text-gray-200">
+                                {cleanedCourse}
+                              </p>
+                            </CardContent>
+                          </div>
+                          <div className="p-5 pt-0">
+                            <a
+                              href={courseData.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full inline-block text-center bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+                            >
+                              View Course
+                            </a>
+                          </div>
                         </Card>
                       </motion.div>
                     );
