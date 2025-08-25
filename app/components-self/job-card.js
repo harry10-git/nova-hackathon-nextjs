@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation"; 
 import { CardBody, CardContainer, CardItem } from "../components/3d-card";
 
@@ -10,26 +10,45 @@ export default function JobCard({
   description,
 }) {
   const router = useRouter();
+  const [applyStatus, setApplyStatus] = useState("");
 
   const handleTryNow = async () => {
-    const userId = localStorage.getItem("userId"); // ✅ directly get from localStorage
+    const userId = localStorage.getItem("userId");
     if (!userId) {
       alert("You must be logged in to get recommendations.");
-      // Optionally redirect
-      // router.push("/login");
       return;
     }
-
     try {
-      // ✅ Store IDs in sessionStorage
       sessionStorage.setItem("userIdForRecommendation", userId);
       sessionStorage.setItem("jobIdForRecommendation", jobId);
-
-      // Navigate to recommendations page
       router.push("/recommendations");
     } catch (error) {
       console.error("Error preparing for recommendations:", error);
       alert("Could not prepare your recommendations. Please try again.");
+    }
+  };
+
+  const handleApplyJob = async () => {
+    setApplyStatus("");
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      setApplyStatus("Please login to apply for this job.");
+      return;
+    }
+    try {
+      const response = await fetch("/api/job-applications/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, jobId }),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        setApplyStatus("Application submitted successfully!");
+      } else {
+        setApplyStatus(result.error || "Failed to apply.");
+      }
+    } catch (error) {
+      setApplyStatus("Failed to apply.");
     }
   };
 
@@ -70,11 +89,11 @@ export default function JobCard({
           <CardItem
             translateZ={20}
             as="button"
+            onClick={handleApplyJob}
             className="px-4 py-2 rounded-xl bg-blue-500 dark:bg-red-500 dark:text-neutral-50 text-red-500 text-xs font-bold"
           >
             Apply Job
           </CardItem>
-          
         </div>
         <div className="flex items-center justify-center">
           <CardItem
@@ -86,6 +105,9 @@ export default function JobCard({
             Know More
           </CardItem>
         </div>
+        {applyStatus && (
+          <div className="mt-4 text-green-600 font-semibold text-center">{applyStatus}</div>
+        )}
       </CardBody>
     </CardContainer>
   );
