@@ -117,7 +117,9 @@ export default function Home() {
 
         </div>
       </div>
+      <div className="px-10">
       <InfiniteMovingCardsDemo />
+      </div>
 
     </div>
   );
