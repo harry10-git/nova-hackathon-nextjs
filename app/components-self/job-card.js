@@ -35,7 +35,7 @@ export default function JobCard({
 
   return (
     <CardContainer className="inter-var">
-      <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-white dark:border-black/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border">
+      <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-white dark:border-black/[0.2] border-black/[0.1] w-auto sm:w-[28rem] h-auto rounded-xl p-6 border">
         <CardItem
           translateZ="50"
           className="text-xl font-bold text-neutral-600 dark:text-red-600"
@@ -58,21 +58,32 @@ export default function JobCard({
             alt="thumbnail"
           />
         </CardItem>
-        <div className="flex justify-between items-center mt-20">
+        <div className="flex justify-between items-center mt-10">
           <CardItem
             translateZ={20}
             as="button"
             onClick={handleTryNow}
             className="px-4 py-2 rounded-xl text-xs font-normal dark:text-neutral-800"
           >
-            Try now →
+            AI Course Recommendations →
           </CardItem>
           <CardItem
             translateZ={20}
             as="button"
-            className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-red-500 text-red-500 text-xs font-bold"
+            className="px-4 py-2 rounded-xl bg-blue-500 dark:bg-red-500 dark:text-neutral-50 text-red-500 text-xs font-bold"
           >
-            Sign up
+            Apply Job
+          </CardItem>
+          
+        </div>
+        <div className="flex items-center justify-center">
+          <CardItem
+            translateZ={20}
+            as="button"
+            className="px-16 py-2 rounded-xl bg-blue-500 dark:bg-neutral-500 dark:text-white text-red-500 text-xs font-bold"
+            onClick={() => router.push(`/job-openings/${jobId}`)} 
+          >
+            Know More
           </CardItem>
         </div>
       </CardBody>

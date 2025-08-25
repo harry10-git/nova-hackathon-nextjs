@@ -74,7 +74,7 @@ export const WavyBackground = ({
 
   let animationId;
   const render = () => {
-    ctx.fillStyle = backgroundFill || "black";
+    ctx.fillStyle = "white" || "white";
     ctx.globalAlpha = waveOpacity || 0.5;
     ctx.fillRect(0, 0, w, h);
     drawWave(5);
@@ -100,7 +100,7 @@ export const WavyBackground = ({
     <div
       className={cn("h-screen flex flex-col items-center justify-center", containerClassName)}>
       <canvas
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 -z-10"
         ref={canvasRef}
         id="canvas"
         style={{
