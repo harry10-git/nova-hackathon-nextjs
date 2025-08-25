@@ -93,7 +93,11 @@ export default function RecommendationsPage() {
                   course suggestions:
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {Object.entries(recommendations).map(([skill, course]) => (
+                {Object.entries(recommendations).map(([skill, course]) => {
+                  // Remove duplicate course text if repeated
+                  const cleanedCourse = course.replace(/^(.*?):\s*\1/, "$1");
+
+                  return (
                     <Card key={skill}>
                       <CardHeader>
                         <CardTitle>Skill: {skill}</CardTitle>
@@ -102,11 +106,12 @@ export default function RecommendationsPage() {
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <p className="font-semibold">{course}</p>
+                        <p className="font-semibold">{cleanedCourse}</p>
                       </CardContent>
                     </Card>
-                  ))}
-                </div>
+                  );
+                })}
+              </div>
               </div>
             )}
           </div>
