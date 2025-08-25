@@ -15,31 +15,31 @@ export default function InfiniteMovingCardsDemo() {
 const testimonials = [
   {
     quote:
-      "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair.",
-    name: "Charles Dickens",
-    title: "A Tale of Two Cities",
+      "I was struggling to figure out which skills I should actually focus on, but this site made it so much clearer. The course recommendations were spot on, and I even landed an interview two weeks after finishing one of them.",
+    name: "Charles Charan",
+    title: "Risk and Compliance",
   },
   {
     quote:
-      "To be, or not to be, that is the question: Whether 'tis nobler in the mind to suffer The slings and arrows of outrageous fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep.",
-    name: "William Shakespeare",
-    title: "Hamlet",
+      "What I liked most is that it didn’t just throw random jobs at me. It suggested roles based on my profile and skills I could improve. Honestly feels like having a career coach in my pocket.",
+    name: "Anton Shakespeare",
+    title: "Model Risk ",
   },
   {
-    quote: "All that we see or seem is but a dream within a dream.",
-    name: "Edgar Allan Poe",
-    title: "A Dream Within a Dream",
-  },
-  {
-    quote:
-      "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.",
-    name: "Jane Austen",
-    title: "Pride and Prejudice",
+    quote: "I’d been applying to jobs for months with no luck. After following the recommended courses here, I added the new skills to my resume and got shortlisted within a week. Totally worth it.",
+    name: "Edgar Allan Raj",
+    title: "Financial Analyst",
   },
   {
     quote:
-      "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.",
-    name: "Herman Melville",
-    title: "Moby-Dick",
+      "The platform actually suggested a job I’d never even thought about before. I checked it out, took a quick certification course, and now I’m working in that field. Feels like the right career move.",
+    name: "Jane Ojha",
+    title: "Data Technology",
+  },
+  {
+    quote:
+      "Instead of wasting hours browsing random courses, I just followed the personalized list here. Every course felt relevant to my career path. Highly recommend for anyone serious about upskilling.",
+    name: "Ashik Melville",
+    title: "Financial Crime",
   },
 ];
