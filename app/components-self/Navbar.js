@@ -42,7 +42,7 @@ export default function Navbar() {
             <div className="flex space-x-6">
                 <a href="/home" className="hover:underline">Home</a>
                 <a href="/job-openings" className="hover:underline">Jobs</a>
-                <a href="/item3" className="hover:underline">Item3</a>
+                <a href="/recommend-jobs" className="hover:underline">Recommend Jobs</a>
                 <a href="/item4" className="hover:underline">Item4</a>
             </div>
 
