@@ -4,6 +4,7 @@
 
 import React, { useEffect, useState } from "react";
 import Navbar from "../components-self/Navbar";
+import { AuroraBackground } from "../components/aurora-background-white";
 import {
   Card,
   CardHeader,
@@ -78,6 +79,7 @@ export default function RecommendationsPage() {
   return (
     <div>
       <Navbar />
+       <AuroraBackground>
       <div className="container mx-auto p-6">
         <h1 className="text-3xl font-extrabold mb-6 text-gray-900 dark:text-black">
           🎯 AI recommended courses for you 
@@ -158,6 +160,8 @@ export default function RecommendationsPage() {
           </motion.div>
         )}
       </div>
+      </AuroraBackground>
+
     </div>
   );
 }

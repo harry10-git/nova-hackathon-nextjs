@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Navbar from "../components-self/Navbar";
+import { AuroraBackground } from "../components/aurora-background-white";
 
 export default function MyApplicationsPage() {
   const [applications, setApplications] = useState([]);
@@ -58,14 +59,15 @@ export default function MyApplicationsPage() {
   return (
     <div>
       <Navbar />
-      <div className="max-w-4xl mx-auto mt-14 p-6 bg-white rounded shadow">
+      <AuroraBackground>
+      <div className="max-w-4xl mx-auto mt-14 p-6 bg-white rounded shadow relative z-10">
         <h1 className="text-2xl font-bold mb-6">My Applied Jobs</h1>
         {loading ? (
           <div>Loading...</div>
         ) : applications.length === 0 ? (
           <div>No applications found.</div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
             {applications.map(app => (
               <div key={app.applicationId} className="bg-gray-50 rounded-lg shadow p-6 flex flex-col justify-between">
                 <div>
@@ -95,6 +97,7 @@ export default function MyApplicationsPage() {
           </div>
         )}
       </div>
+      </AuroraBackground>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components-self/Navbar";
 import JobCard from "../components/JobCard"; // We will create this component
 import { motion } from "framer-motion";
+import { AuroraBackground } from "../components/aurora-background-white";
 
 export default function RecommendJobsPage() {
   const [recommendedJobs, setRecommendedJobs] = useState([]);
@@ -61,6 +62,7 @@ export default function RecommendJobsPage() {
   return (
     <div>
       <Navbar />
+      <AuroraBackground>
       <div className="container mx-auto p-6">
         <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-black">
           🚀 AI recommended jobs for you based on your profile
@@ -92,6 +94,7 @@ export default function RecommendJobsPage() {
           </motion.div>
         )}
       </div>
+      </AuroraBackground>
     </div>
   );
 }

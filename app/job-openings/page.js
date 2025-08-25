@@ -3,6 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { AuroraBackground } from "../components/aurora-background-white";
 
 import JobCard from "../components-self/job-card";
 import Navbar from "../components-self/Navbar";
@@ -29,14 +30,10 @@ export default function Page() {
 
   return (
     <div
-      style={{
-        backgroundColor: "#ffffff",
-        backgroundImage:
-          'url("https://www.transparenttextures.com/patterns/axiom-pattern.png")',
-        minHeight: "100vh",
-      }}
+      
     >
       <Navbar />
+      <AuroraBackground>
       <div className="px-4 grid grid-cols-1 sm:grid-cols-3 gap-6 mt-14">
         {jobPostings.map((job) => (
           
@@ -49,6 +46,7 @@ export default function Page() {
        
         ))}
       </div>
+      </AuroraBackground>
     </div>
   );
 }

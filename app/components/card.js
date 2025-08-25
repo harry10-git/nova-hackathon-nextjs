@@ -10,7 +10,7 @@ const Card = ({ children, className = "" }) => (
   <motion.div
     whileHover={{ scale: 1.05, boxShadow: "0 8px 30px rgba(0,0,0,0.15)" }}
     transition={{ type: "spring", stiffness: 300, damping: 15 }}
-    className={`bg-white/70 dark:bg-neutral-300 border border-gray-200 dark:border-neutral-100 
+    className={`bg-white/70 dark:bg-neutral-200 border border-gray-200 dark:border-neutral-100 
                 rounded-2xl shadow-md overflow-hidden backdrop-blur-sm ${className}`}
   >
     {children}

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components-self/Navbar";
 import Image from "next/image";
+import { AuroraBackground } from "../components/aurora-background-white";
 import img from "../assets/superboy.png";
 
 export default function Profile() {
@@ -79,6 +80,7 @@ export default function Profile() {
   return (
     <div>
       <Navbar />
+      <AuroraBackground>
 
       <div className="grid grid-cols-2 mt-20 justify-center items-center">
         <div className="col-span-1">
@@ -152,6 +154,7 @@ export default function Profile() {
           </div>
         </div>
       </div>
+      </AuroraBackground>
     </div>
   );
 }

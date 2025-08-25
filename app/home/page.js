@@ -5,7 +5,6 @@ import InfiniteMovingCardsDemo from "../components-self/testimonials";
 import { AiOutlineArrowRight } from "react-icons/ai"; // Import the arrow icon from React Icons
 
 
-
 export default function Home() {
   const [email, setEmail] = useState("");
   const [totalJobs, setTotalJobs] = useState(0);
@@ -55,13 +54,14 @@ export default function Home() {
     <div className="">
       <Navbar />
 
+
       {email ? (
         <p className="text-xl mt-4">Hello, {email}</p>
       ) : (
         <p className="text-xl mt-4">You are not logged in.</p>
       )}
 
-      <div className="mx-6 rounded-xl px-4 py-2">
+      <div className="mx-6 rounded-xl px-4 py-2 relative z-10">
         <div className="grid grid-cols-6 gap-6">
           <div className="col-span-2 flex flex-col gap-2 items-center justify-center bg-red-500 px-2 py-4 transform transition-transform duration-300 hover:scale-105">
             <h4 className="text-3xl text-white font-bold">Total Job Openings :</h4>
@@ -106,6 +106,7 @@ export default function Home() {
   <div>
     <AiOutlineArrowRight className="mt-2 w-8 h-8" /> {/* React Icon */}
   </div>
+  
 </div>
 
         
@@ -117,6 +118,7 @@ export default function Home() {
         </div>
       </div>
       <InfiniteMovingCardsDemo />
+
     </div>
   );
 }
