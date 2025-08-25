@@ -76,6 +76,16 @@ export default function JobCard({
           </CardItem>
           
         </div>
+        <div className="flex items-center justify-center">
+          <CardItem
+            translateZ={20}
+            as="button"
+            className="px-16 py-2 rounded-xl bg-blue-500 dark:bg-neutral-500 dark:text-white text-red-500 text-xs font-bold"
+            onClick={() => router.push(`/job-openings/${jobId}`)} 
+          >
+            Know More
+          </CardItem>
+        </div>
       </CardBody>
     </CardContainer>
   );
