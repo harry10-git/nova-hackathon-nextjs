@@ -62,8 +62,8 @@ export default function RecommendJobsPage() {
     <div>
       <Navbar />
       <div className="container mx-auto p-6">
-        <h1 className="text-3xl font-extrabold mb-6 text-gray-900 dark:text-black">
-          🚀 Recommended Jobs For You
+        <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-black">
+          🚀 AI recommended jobs for you based on your profile
         </h1>
 
         {isLoading && <LoadingSpinner />}

@@ -80,7 +80,7 @@ export default function RecommendationsPage() {
       <Navbar />
       <div className="container mx-auto p-6">
         <h1 className="text-3xl font-extrabold mb-6 text-gray-900 dark:text-black">
-          🎯 Recommended Courses For You
+          🎯 AI recommended courses for you 
         </h1>
 
         {isLoading && <LoadingSpinner />}
@@ -133,7 +133,7 @@ export default function RecommendationsPage() {
                               </CardDescription>
                             </CardHeader>
                             <CardContent>
-                              <p className="font-semibold text-gray-800 dark:text-gray-200">
+                              <p className="font-semibold text-gray-800 dark:text-neutral-800">
                                 {cleanedCourse}
                               </p>
                             </CardContent>
@@ -143,7 +143,7 @@ export default function RecommendationsPage() {
                               href={courseData.link}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="w-full inline-block text-center bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+                              className="w-full inline-block text-center bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300"
                             >
                               View Course
                             </a>
