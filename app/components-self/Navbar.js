@@ -43,7 +43,7 @@ export default function Navbar() {
                 <a href="/home" className="hover:underline">Home</a>
                 <a href="/job-openings" className="hover:underline">Jobs</a>
                 <a href="/recommend-jobs" className="hover:underline">Recommend Jobs</a>
-                <a href="/item4" className="hover:underline">Item4</a>
+                <a href="/myApplications" className="hover:underline">My Applications</a>
             </div>
 
             {/* Right Section */}
