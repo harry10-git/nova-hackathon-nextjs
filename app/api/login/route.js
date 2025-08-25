@@ -32,7 +32,7 @@ export async function POST(req) {
         const token = jwt.sign(
             { userId: user._id, email: user.email },
             'mysecret',
-            { expiresIn: '1h' }
+            { expiresIn: '5h' }
         );
 
         // ✅ Return both token and userId
