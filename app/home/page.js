@@ -2,44 +2,40 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components-self/Navbar";
 import InfiniteMovingCardsDemo from "../components-self/testimonials";
-import { AiOutlineArrowRight } from "react-icons/ai"; // Import the arrow icon from React Icons
-
+import { AiOutlineArrowRight } from "react-icons/ai";
+import CountUp from "react-countup"; // <-- import CountUp
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [totalJobs, setTotalJobs] = useState(0);
   const [popularSkills, setPopularSkills] = useState([]);
+  const [jobsLoaded, setJobsLoaded] = useState(false);
+  const [skillsLoaded, setSkillsLoaded] = useState(false);
 
   useEffect(() => {
-    // Retrieve the email from localStorage
     const userEmail = localStorage.getItem("email");
     setEmail(userEmail);
 
-    // Fetch total jobs from the API
     const fetchTotalJobs = async () => {
       try {
         const response = await fetch("/api/home/totalJobs");
         if (response.ok) {
           const data = await response.json();
           setTotalJobs(data.totalJobPostings);
-        } else {
-          console.error("Failed to fetch total jobs");
+          setJobsLoaded(true);
         }
       } catch (error) {
         console.error("Error fetching total jobs:", error);
       }
     };
 
-    // Fetch popular skills from the API
     const fetchPopularSkills = async () => {
       try {
         const response = await fetch("/api/home/popularSkills");
         if (response.ok) {
           const data = await response.json();
-          // Take the top 4 most popular skills
           setPopularSkills(data.slice(0, 4));
-        } else {
-          console.error("Failed to fetch popular skills");
+          setSkillsLoaded(true);
         }
       } catch (error) {
         console.error("Error fetching popular skills:", error);
@@ -53,8 +49,6 @@ export default function Home() {
   return (
     <div className="">
       <Navbar />
-
-
       {email ? (
         <p className="text-xl mt-4">Hello, {email}</p>
       ) : (
@@ -65,62 +59,61 @@ export default function Home() {
         <div className="grid grid-cols-6 gap-6">
           <div className="col-span-2 flex flex-col gap-2 items-center justify-center bg-red-500 px-2 py-4 transform transition-transform duration-300 hover:scale-105">
             <h4 className="text-3xl text-white font-bold">Total Job Openings :</h4>
-            <h3 className="text-5xl font-extrabold text-white"> {totalJobs}</h3>
+            <h3 className="text-5xl font-extrabold text-white">
+              {jobsLoaded ? (
+                <CountUp end={totalJobs} duration={3} />
+              ) : (
+                0
+              )}
+            </h3>
           </div>
 
           <div className="col-span-3 px-2 py-4 flex flex-col justify-center items-center bg-red-500 transform transition-transform duration-300 hover:scale-105">
-  <h4 className="text-2xl font-bold text-white mb-3">Top Skills</h4>
-  <div className="overflow-x-auto w-full">
-    <table className="min-w-full border border-red-200 divide-y-2 divide-red-300">
-      <thead className="bg-white text-black">
-        <tr>
-          <th className="px-4 py-2 text-left font-semibold">Skill</th>
-          <th className="px-4 py-2 text-left font-semibold">Jobs</th>
-        </tr>
-      </thead>
+            <h4 className="text-2xl font-bold text-white mb-3">Top Skills</h4>
+            <div className="overflow-x-auto w-full">
+              <table className="min-w-full border border-red-200 divide-y-2 divide-red-300">
+                <thead className="bg-white text-black">
+                  <tr>
+                    <th className="px-4 py-2 text-left font-semibold">Skill</th>
+                    <th className="px-4 py-2 text-left font-semibold">Jobs</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-red-200 bg-white">
+                  {popularSkills.map((skillObj, index) => {
+                    const skillName = Object.keys(skillObj)[0];
+                    const skillCount = skillObj[skillName];
+                    return (
+                      <tr key={index} className="hover:bg-red-50 transition duration-200">
+                        <td className="px-4 py-2 text-red-700 font-medium">{skillName}</td>
+                        <td className="px-4 py-2 text-gray-700">
+                          {skillsLoaded ? (
+                            <CountUp end={skillCount} duration={3} />
+                          ) : (
+                            0
+                          )} jobs
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-      <tbody className="divide-y divide-red-200 bg-white">
-        {popularSkills.map((skillObj, index) => {
-          const skillName = Object.keys(skillObj)[0];
-          const skillCount = skillObj[skillName];
-          return (
-            <tr
-              key={index}
-              className="hover:bg-red-50 transition duration-200"
-            >
-              <td className="px-4 py-2 text-red-700 font-medium">{skillName}</td>
-              <td className="px-4 py-2 text-gray-700">{skillCount} jobs</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  </div>
-        </div>
-
-       <div
-  className="col-span-1 bg-red-500 text-white text-2xl font-semibold flex flex-col justify-center items-center text-center transform transition-transform duration-300 hover:scale-105 cursor-pointer"
-  onClick={() => window.location.href = "/job-openings"}
->
-  <h3>Explore <br /> More <br /> Opportunities </h3>
-  <div>
-    <AiOutlineArrowRight className="mt-2 w-8 h-8" /> {/* React Icon */}
-  </div>
-  
-</div>
-
-        
-
-
-
-     
-
+          <div
+            className="col-span-1 bg-red-500 text-white text-2xl font-semibold flex flex-col justify-center items-center text-center transform transition-transform duration-300 hover:scale-105 cursor-pointer"
+            onClick={() => window.location.href = "/job-openings"}
+          >
+            <h3>Explore <br /> More <br /> Opportunities </h3>
+            <div>
+              <AiOutlineArrowRight className="mt-2 w-8 h-8" />
+            </div>
+          </div>
         </div>
       </div>
       <div className="px-10">
-      <InfiniteMovingCardsDemo />
+        <InfiniteMovingCardsDemo />
       </div>
-
     </div>
   );
 }
