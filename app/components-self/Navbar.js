@@ -35,7 +35,7 @@ export default function Navbar() {
                     alt="Hirelink Logo"
                     className="h-8 w-12"
                 />
-                <span className="text-xl font-bold">Hirelink</span>
+                <span className="text-xl font-bold">CareerCompass</span>
             </div>
 
             {/* Middle Section */}
